@@ -1,3 +1,30 @@
+<?php
+include_once('Class/UserClass.php');
+
+$user = new UserClass();
+
+if(isset($_POST['login'])){
+    $data = [
+            'username' => $user->escape_string($_POST['username']),
+            'password' => $user->escape_string($_POST['password']),
+     ];
+
+    $auth = $user->user_create($data);
+
+    if(!$auth){
+        $_SESSION['message'] = 'Invalid username or password';
+        header('location:index.php');
+    }
+    else{
+        $_SESSION['user'] = $auth;
+        header('location:dashboard.php');
+    }
+}
+else{
+    $_SESSION['message'] = 'You need to login first';
+    header('location:index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,15 +33,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Wholesale App Login</title>
+        <title>Wholesale App Register</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
+                <!-- Navigation-->
+                <?php include('part/home_navbar.php') ?>
                 <main>
-                    <div class="container">
+                    <div class="container mb-5">
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -59,7 +88,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="login.php">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -67,15 +96,7 @@
                     </div>
                 </main>
             </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Mohammad Hossain 2021</div> 
-                        </div>
-                    </div>
-                </footer>
-            </div>
+            <?php include('part/home_footer.php') ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>

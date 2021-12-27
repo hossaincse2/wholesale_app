@@ -1,3 +1,31 @@
+<?php
+//start session
+session_start();
+
+include_once('Class/UserClass.php');
+
+$user = new UserClass();
+
+if(isset($_POST['login'])){
+    $username = $user->escape_string($_POST['username']);
+    $password = $user->escape_string($_POST['password']);
+
+    $auth = $user->check_login($username, $password);
+
+    if(!$auth){
+        $_SESSION['message'] = 'Invalid username or password';
+        header('location:index.php');
+    }
+    else{
+        $_SESSION['user'] = $auth;
+        header('location:dashboard.php');
+    }
+}
+else{
+    $_SESSION['message'] = 'You need to login first';
+    header('location:index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,8 +41,10 @@
     <body class="bg-primary">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
+                <!-- Navigation-->
+                <?php include('part/home_navbar.php') ?>
                 <main>
-                    <div class="container">
+                    <div class="container mb-5">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -40,7 +70,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -48,15 +78,7 @@
                     </div>
                 </main>
             </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Mohammad Hossain 2021</div> 
-                        </div>
-                    </div>
-                </footer>
-            </div>
+            <?php include('part/home_footer.php') ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>

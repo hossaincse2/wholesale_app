@@ -39,6 +39,7 @@ class DatabaseTable{
             // users sql to create table
             $sql = "CREATE TABLE orders (
                 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                order_number VARCHAR(50),
                 user_id INT(50),
                 product_id INT(50), 
                 create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
