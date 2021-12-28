@@ -7,14 +7,14 @@ include_once('Class/UserClass.php');
 $user = new UserClass();
 
 if(isset($_POST['login'])){
-    $username = $user->escape_string($_POST['username']);
+    $email = $user->escape_string($_POST['email']);
     $password = $user->escape_string($_POST['password']);
 
-    $auth = $user->check_login($username, $password);
+    $auth = $user->check_login($email, $password);
 
     if(!$auth){
         $_SESSION['message'] = 'Invalid username or password';
-        header('location:index.php');
+       // header('location:login.php');
     }
     else{
         $_SESSION['user'] = $auth;
@@ -23,7 +23,7 @@ if(isset($_POST['login'])){
 }
 else{
     $_SESSION['message'] = 'You need to login first';
-    header('location:index.php');
+    // header('location:login.php');
 }
 ?>
 <!DOCTYPE html>
@@ -50,13 +50,13 @@ else{
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form method="post" action="">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
+                                                <input class="form-control" id="email" name="email" type="email" placeholder="Email Address" />
+                                                <label for="email">Email Address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="form-check mb-3">
@@ -64,8 +64,8 @@ else{
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.html">Forgot Password?</a>
-                                                <a class="btn btn-primary" href="index.html">Login</a>
+                                                <a class="small" href="#">Forgot Password?</a>
+                                                <button class="btn btn-primary" name="login" type="submit">Login</button>
                                             </div>
                                         </form>
                                     </div>

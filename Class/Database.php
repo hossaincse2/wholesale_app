@@ -49,31 +49,20 @@ class Database{
     }
 
 
-    function insertInto($tableName,$values) {
-        $i = NULL;
+    function insertInto($tableName,$data) {
 
-        $this->sqlQuery = 'INSERT INTO '.$tableName.' VALUES (';
-        $i = 0;
-        while($values[$i]["val"] != NULL && $values[$i]["type"] != NULL) {
-            if($values[$i]["type"] == "char") {
-                $this->sqlQuery .= "'";
-                $this->sqlQuery .= $values[$i]["val"];
-                $this->sqlQuery .= "'";
-            }
-            else if($values[$i]["type"] == 'int') {
-                $this->sqlQuery .= $values[$i]["val"];
-            }
-            $i++;
-            if($values[$i]["val"] != NULL)  {
-                $this->sqlQuery .= ',';
-            }
+        $this->sqlQuery = "INSERT INTO ".$tableName." (";
+        $this->sqlQuery .= implode(",", array_keys($data)) . ') VALUES (';
+        $this->sqlQuery .= "'" . implode("','", array_values($data)) . "')";
+        if($this->connection->query($this->sqlQuery))
+        {
+            return ['status' => true, 'message' => 'User Register Successfully!'];
         }
-        $this->sqlQuery .= ')';
-        #echo $this -> sqlQuery;
-        $this->connection->query($this->sqlQuery);
-        return $this->sqlQuery;
-        #$this -> sqlQuery = NULL;
-    }
+        else
+        {
+            return ['status' => true, 'message' => mysqli_error($this->connection)];
+        }
+     }
 
     function selectFreeRun($query) {
         $this->dataSet = $this->connection->query($query);
@@ -85,6 +74,5 @@ class Database{
     }
   }
   
-  $db = new Database();
-  $db->db_num("SELECT fields FROM YourTable");
+
 

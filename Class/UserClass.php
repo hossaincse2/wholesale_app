@@ -7,12 +7,12 @@ class UserClass extends Database {
         parent::__construct();
     }
     public function user_create($data){
-
-            $this->insertInto('users',$data);
+           $status =  $this->insertInto('users',$data);
+           return $status;
     }
-    public function check_login($username, $password){
+    public function check_login($email, $password){
 
-        $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
         $query = $this->connection->query($sql);
 
         if($query->num_rows > 0){

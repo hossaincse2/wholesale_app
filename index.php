@@ -9,10 +9,8 @@ if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
     $sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
     $row = $user->details($sql);
 }else{
-    // header('location:index.php');
+      // header('Location: login.php');
 }
-
-
 
 ?>
 <!DOCTYPE html>

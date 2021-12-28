@@ -1,4 +1,19 @@
+<?php
+session_start();
 
+include_once('Class/UserClass.php');
+
+$user = new UserClass();
+if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
+    include_once('Class/UserClass.php');
+    $user = new UserClass();
+    //fetch user data
+    $sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
+    $row = $user->details($sql);
+}else{
+    header('location:login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,7 +46,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="../wholesale_app/logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
