@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-include_once('Class/UserClass.php');
-
-$user = new UserClass();
 if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
     include_once('Class/UserClass.php');
     $user = new UserClass();

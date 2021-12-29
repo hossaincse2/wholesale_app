@@ -30,8 +30,14 @@ class Database{
     }
     function selectAll($tableName)  {
         $this->sqlQuery = 'SELECT * FROM '.$this->database.'.'.$tableName;
-        $this ->dataSet = $this->connection->query($this->sqlQuery);
-        return $this->dataSet;
+        $this->dataSet = $this->connection->query($this->sqlQuery);
+//        $row = $this->dataSet->fetch_assoc();
+        $data = [];
+        while ($row = $this->dataSet->fetch_assoc())
+        {
+            $data[] = $row;
+        }
+        return $data;
     }
 
     function selectWhere($tableName,$rowName,$operator,$value,$valueType)   {
@@ -44,7 +50,7 @@ class Database{
         }
         $this->dataSet = $this->connection->query($this->sqlQuery);
         $this->sqlQuery = NULL;
-        return $this -> dataSet;
+        return $this->dataSet;
         #return $this -> sqlQuery;
     }
 
@@ -56,11 +62,11 @@ class Database{
         $this->sqlQuery .= "'" . implode("','", array_values($data)) . "')";
         if($this->connection->query($this->sqlQuery))
         {
-            return ['status' => true, 'message' => 'User Register Successfully!'];
+            return ['status' => true, 'message' => 'Inserted Successfully!'];
         }
         else
         {
-            return ['status' => true, 'message' => mysqli_error($this->connection)];
+            return ['status' => false, 'message' => mysqli_error($this->connection)];
         }
      }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2021 at 06:16 PM
+-- Generation Time: Dec 29, 2021 at 07:23 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -46,10 +46,18 @@ CREATE TABLE `products` (
   `product_title` varchar(30) NOT NULL,
   `product_desc` varchar(30) NOT NULL,
   `retail_price` varchar(50) DEFAULT NULL,
-  `wholesale_pricc` varchar(50) DEFAULT NULL,
-  `prodcut_image` varchar(50) DEFAULT NULL,
+  `wholesale_price` varchar(50) DEFAULT NULL,
+  `product_image` varchar(50) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `product_title`, `product_desc`, `retail_price`, `wholesale_price`, `product_image`, `create_at`) VALUES
+(1, 'zxcz', 'zxczxcx', '100', '', '', '2021-12-29 17:06:36'),
+(2, 'zxcz', 'zxczxcx', '100', '', '', '2021-12-29 17:07:37');
 
 -- --------------------------------------------------------
 
@@ -64,8 +72,16 @@ CREATE TABLE `users` (
   `user_type` varchar(30) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `mobile` varchar(50) DEFAULT NULL,
+  `password` varchar(50) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `user_type`, `email`, `mobile`, `password`, `create_at`) VALUES
+(2, 'MD', 'Hossain', 'Customer', 'hossain@gmail.com', '0454545', '12345678', '2021-12-28 16:37:48');
 
 --
 -- Indexes for dumped tables
@@ -103,13 +119,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
