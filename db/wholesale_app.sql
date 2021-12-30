@@ -42,12 +42,13 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `products` (
-  `id` int(6) UNSIGNED NOT NULL,
+  `id` int(6) UNSIGNED NOT NULL, 
   `product_title` varchar(30) NOT NULL,
   `product_desc` varchar(30) NOT NULL,
   `retail_price` varchar(50) DEFAULT NULL,
   `wholesale_price` varchar(50) DEFAULT NULL,
   `product_image` varchar(50) DEFAULT NULL,
+  `created_by` int(6) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

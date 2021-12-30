@@ -23,6 +23,7 @@
                                             <th>WholeSale Price</th>
                                             <th>Image</th>
                                             <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -32,6 +33,7 @@
                                             <th>WholeSale Price</th>
                                             <th>Image</th>
                                             <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -43,6 +45,7 @@
                                             <td><?php echo $data['product_title'] ?></td>
                                             <td><?php echo $data['product_title'] ?></td>
                                             <td><?php echo $data['product_title'] ?></td> 
+                                            <td><a href="add_product.php?product_id=<?php echo $data['id'] ?>">Edit</a> | <a href="?product_id=<?php echo $data['id'] ?>" onClick="return confirm('Are you sure you want to delete?')">Delete</a></td> 
                                         </tr> 
                                         <?php }
                                        } ?>

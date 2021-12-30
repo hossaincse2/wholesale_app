@@ -25,6 +25,7 @@
                                             <th>QTY</th>
                                             <th>Price</th>
                                             <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -36,6 +37,7 @@
                                             <th>QTY</th>
                                             <th>Price</th>
                                             <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -49,6 +51,7 @@
                                             <td><?php echo $data['mobile'] ?></td> 
                                             <td><?php echo $data['mobile'] ?></td> 
                                             <td><?php echo $data['mobile'] ?></td> 
+                                            <td><a href="">Delete</a></td> 
                                         </tr> 
                                         <?php }
                                        } ?>
