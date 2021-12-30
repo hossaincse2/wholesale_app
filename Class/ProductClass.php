@@ -11,5 +11,13 @@ class ProductClass extends Database {
     }
     public function products(){
         return $this->selectAll('products');
+    } 
+    public function orders(){
+        return $this->selectAll('orders');
+    }
+
+    public function place_order($data){
+        $status =  $this->insertInto('orders',$data);
+        return $status;
     }
 }

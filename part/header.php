@@ -1,9 +1,11 @@
 <?php
 session_start();
-
+include_once('../Class/UserClass.php');
+include_once('../Class/ProductClass.php');
+$user = new UserClass();
+$product = new ProductClass();
 if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
-    include_once('Class/UserClass.php');
-    $user = new UserClass();
+    
     //fetch user data
     $sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
     $row = $user->details($sql);

@@ -6,13 +6,20 @@ include_once('Class/UserClass.php');
 include_once('Class/ProductClass.php');
 $user = new UserClass();
 $product = new ProductClass();
-$products = $product->products();
+$products = $product->products(); 
 if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
    //fetch user data
     $sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
-    $row = $user->details($sql);
+    $userDetails = $user->details($sql);
 }
-
+if(isset($_POST['order'])){
+    $data = [
+            'user_id' => $user->escape_string($_POST['firstname']),
+            'product_id' => $user->escape_string($_POST['lastname']),
+            'order_no' => $user->escape_string($_POST['user_type'])
+     ];
+    $status = $product->place_order($data);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,12 +62,13 @@ if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
                                     <!-- Product name-->
                                     <h5 class="fw-bolder"><?php echo $data['product_title'] ?></h5>
                                     <!-- Product price-->
-                                    Tk <?php echo $data['retail_price'] ?>
+                                     
+                                    Tk <?php echo $userDetails['user_type'] == 'customer' ? $data['retail_price'] : $data['wholesale_price'] ?>
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Place Order</a></div>
+                                <div class="text-center"><a data-id="<?php echo $data['id'] ?>" class="btn btn-outline-dark mt-auto placeOrder" href="#">Place Order</a></div>
                             </div>
                         </div>
                     </div>

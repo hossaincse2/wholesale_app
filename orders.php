@@ -1,4 +1,5 @@
    <?php include('part/header.php') ?>
+   <?php $orders = $product->orders(); ?>
         <div id="layoutSidenav">
           <?php include('part/sidebar.php') ?>
             <div id="layoutSidenav_content">
@@ -38,15 +39,19 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php if (count($orders) > 0){
+                                            foreach ($orders as $data){  ?>
                                         <tr>
-                                            <td>Customer/td>
-                                            <td>Hossain</td>
-                                            <td>01776427516</td>
-                                            <td>Mobile</td>
-                                            <td>1</td>
-                                            <td>200</td>
-                                            <td>2011/04/25</td> 
+                                            <td><?php echo $data['product_title'] ?></td>
+                                            <td><?php echo $data['product_title'] ?></td>
+                                            <td><?php echo $data['product_title'] ?></td>
+                                            <td><?php echo $data['product_title'] ?></td>
+                                            <td><?php echo $data['product_title'] ?></td> 
+                                            <td><?php echo $data['product_title'] ?></td> 
+                                            <td><?php echo $data['product_title'] ?></td> 
                                         </tr> 
+                                        <?php }
+                                       } ?>
                                     </tbody>
                                 </table>
                             </div>

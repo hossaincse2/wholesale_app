@@ -30,7 +30,7 @@
                                         <?php echo $status['message']; ?>
                                     </div>
                                 <?php } ?>
-                                <form method="post" action="">
+                                <form method="post" action="" enctype="multipart/form-data">
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">

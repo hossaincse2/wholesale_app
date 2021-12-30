@@ -16,5 +16,12 @@
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        <script>
+            $(document).on('keyup change','#retail_price',function(){
+                 let retail_price = $(this).val(); 
+                 let calculation_price = retail_price - ((retail_price*10)/100); 
+                 $('#wholesale_price').val(calculation_price);
+            })
+        </script>
     </body>
 </html>

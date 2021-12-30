@@ -1,4 +1,5 @@
    <?php include('part/header.php') ?>
+   <?php $users = $product->users(); ?>
         <div id="layoutSidenav">
           <?php include('part/sidebar.php') ?>
             <div id="layoutSidenav_content">
@@ -38,15 +39,19 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php if (count($users) > 0){
+                                            foreach ($users as $data){  ?>
                                         <tr>
-                                            <td>Customer/td>
-                                            <td>Hossain</td>
-                                            <td>01776427516</td>
-                                            <td>Mobile</td>
-                                            <td>1</td>
-                                            <td>200</td>
-                                            <td>2011/04/25</td> 
+                                            <td><?php echo $data['user_type'] ?></td>
+                                            <td><?php echo $data['firstname'] ?></td>
+                                            <td><?php echo $data['prmobileoduct_title'] ?></td>
+                                            <td><?php echo $data['mobile'] ?></td>
+                                            <td><?php echo $data['mobile'] ?></td> 
+                                            <td><?php echo $data['mobile'] ?></td> 
+                                            <td><?php echo $data['mobile'] ?></td> 
                                         </tr> 
+                                        <?php }
+                                       } ?>
                                     </tbody>
                                 </table>
                             </div>

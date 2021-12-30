@@ -32,6 +32,9 @@ class UserClass extends Database {
 
         return $row;
     }
+    public function users(){
+        return $this->selectAll('users');
+    } 
 
     public function escape_string($value){
 
