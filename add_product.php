@@ -4,12 +4,17 @@
        include_once('Class/ProductClass.php');
        $product = new ProductClass();
        $id = $product->escape_string($_POST['product_id']);
+       $product_image = '';
+       if (isset($_FILES['product_image'])){
+           $product_image = $product->fileUpload($_FILES['product_image']);
+       }
+
        $data = [
            'product_title' => $product->escape_string($_POST['product_title']),
            'product_desc' => $product->escape_string($_POST['product_description']),
            'retail_price' => $product->escape_string($_POST['retail_price']),
            'wholesale_price' => $product->escape_string($_POST['wholesale_price']),
-           'product_image' => $product->escape_string($_POST['product_image']),
+           'product_image' => $product_image,
            'created_by' =>  $_SESSION['user']
        ];
        $status = $product->product_create($data,$id);
@@ -38,7 +43,7 @@
                                         <?php echo $status['message']; ?>
                                     </div>
                                 <?php } ?>
-                                <form method="post" action="" enctype="multipart/form-data">
+                                <form method="post" action="" enctype="multipart/form-data" id="customer-form">
                                 <input name="product_id" type="hidden" value="<?php echo isset($productDetails['id']) ? $productDetails['id'] : ''; ?>" />
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
@@ -59,7 +64,7 @@
                                                         <label for="retail_price">Retail Price</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 mb-3">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="wholesale_price" name="wholesale_price" value="<?php echo isset($productDetails['product_title']) ? $productDetails['product_title'] : ''; ?>" type="text"  readonly />
                                                         <label for="wholesale_price">Wholesale Customer Price</label>
@@ -82,4 +87,35 @@
                     </div>
                 </main>
           <?php include('part/footer.php');  ?>
+           <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $("#customer-form").validate({
+                            rules: {
+                                product_title : {
+                                    required: true,
+                                    minlength: 2
+                                },
+                                product_description: {
+                                    required: false,
+                                },
+                                retail_price: {
+                                    required: true,
+                                }
+                            },
+                            messages : {
+                                product_title: {
+                                    required: "Please enter your Product name",
+                                    minlength: "Name should be at least 3 characters"
+                                },
+                                retail_price: {
+                                    required: "Please enter your retailer price",
+                                }
+                            },
+                            submitHandler: function(form) {
+                                form.submit();
+                            }
+                        });
+                    });
+                </script>
            

@@ -9,7 +9,11 @@
             <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+                    <?php if (isset($_SESSION['user'])){ ?>
+                    <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
+                    <?php }else{  ?>
                     <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+                    <?php } ?>
                 </ul>
             </form>
         </div>

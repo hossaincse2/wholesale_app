@@ -38,7 +38,18 @@ class Database{
             $data[] = $row;
         }
         return $data;
-    } 
+    }
+    function selectAllProduct($tableName,$id)  {
+        $this->sqlQuery = 'SELECT * FROM '.$this->database.'.'.$tableName.' WHERE created_by NOT IN ('.$id.')';
+        $this->dataSet = $this->connection->query($this->sqlQuery);
+//        $row = $this->dataSet->fetch_assoc();
+        $data = [];
+        while ($row = $this->dataSet->fetch_assoc())
+        {
+            $data[] = $row;
+        }
+        return $data;
+    }
     function insertInto($tableName,$data) {
 
         $this->sqlQuery = "INSERT INTO ".$tableName." (";

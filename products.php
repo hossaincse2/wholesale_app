@@ -41,10 +41,10 @@
                                             foreach ($products as $data){  ?>
                                         <tr>
                                             <td><?php echo $data['product_title'] ?></td>
-                                            <td><?php echo $data['product_title'] ?></td>
-                                            <td><?php echo $data['product_title'] ?></td>
-                                            <td><?php echo $data['product_title'] ?></td>
-                                            <td><?php echo $data['product_title'] ?></td> 
+                                            <td><?php echo $data['retail_price'] ?></td>
+                                            <td><?php echo $data['wholesale_price'] ?></td>
+                                            <td><img src="images/<?php echo $data['product_image'] ?>" alt=""></td>
+                                            <td><?php echo $data['create_at'] ?></td>
                                             <td><a href="add_product.php?product_id=<?php echo $data['id'] ?>">Edit</a> | <a href="?product_id=<?php echo $data['id'] ?>" onClick="return confirm('Are you sure you want to delete?')">Delete</a></td> 
                                         </tr> 
                                         <?php }

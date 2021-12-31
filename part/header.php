@@ -1,9 +1,10 @@
 <?php
 session_start();
-include_once('../Class/UserClass.php');
-include_once('../Class/ProductClass.php');
+include_once('Class/UserClass.php');
+include_once('Class/ProductClass.php');
 $user = new UserClass();
 $product = new ProductClass();
+$userDetails = [];
 if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
     
     //fetch user data
@@ -25,6 +26,13 @@ if (isset($_SESSION['user']) ||(trim ($_SESSION['user']) != '')){
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <style>
+            label.error {
+                top: 45px !important;
+                left: -12px !important;
+                color: #f44336 !important;
+            }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
